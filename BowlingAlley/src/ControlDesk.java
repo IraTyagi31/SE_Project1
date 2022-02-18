@@ -55,7 +55,9 @@ class ControlDesk extends Thread {
 	private int numLanes;
 	
 	/** The collection of subscribers */
-	private Vector subscribers;
+//	private Vector subscribers;
+	//x//
+	public Subscriber subscribers;
 
     /**
      * Constructor for the ControlDesk class
@@ -65,11 +67,13 @@ class ControlDesk extends Thread {
      */
 
 	public ControlDesk(int numLanes) {
+		//x//
+		subscribers = new Subscriber();
 		this.numLanes = numLanes;
 		lanes = new HashSet(numLanes);
 		partyQueue = new Queue();
 
-		subscribers = new Vector();
+//		subscribers = new Vector();
 
 		for (int i = 0; i < numLanes; i++) {
 			lanes.add(new Lane());
@@ -104,22 +108,22 @@ class ControlDesk extends Thread {
      *
      */
 
-	private Bowler registerPatron(String nickName) {
-		Bowler patron = null;
-
-		try {
-			// only one patron / nick.... no dupes, no checks
-
-			patron = BowlerFile.getBowlerInfo(nickName);
-
-		} catch (FileNotFoundException e) {
-			System.err.println("Error..." + e);
-		} catch (IOException e) {
-			System.err.println("Error..." + e);
-		}
-
-		return patron;
-	}
+//	private Bowler registerPatron(String nickName) {
+//		Bowler patron = null;
+//
+//		try {
+//			// only one patron / nick.... no dupes, no checks
+//
+//			patron = BowlerFile.getBowlerInfo(nickName);
+//
+//		} catch (FileNotFoundException e) {
+//			System.err.println("Error..." + e);
+//		} catch (IOException e) {
+//			System.err.println("Error..." + e);
+//		}
+//
+//		return patron;
+//	}
 
     /**
      * Iterate through the available lanes and assign the paties in the wait queue if lanes are available.
@@ -132,13 +136,14 @@ class ControlDesk extends Thread {
 		while (it.hasNext() && partyQueue.hasMoreElements()) {
 			Lane curLane = (Lane) it.next();
 
-			//---changes---
-			if (!curLane.isPartyAssigned()) {
+			if (curLane.isPartyAssigned() == false) {
 				System.out.println("ok... assigning this party");
 				curLane.assignParty(((Party) partyQueue.next()));
 			}
 		}
-		publish(new ControlDeskEvent(getPartyQueue()));
+//		publish(new ControlDeskEvent(getPartyQueue()));
+		//x//
+		subscribers.publish(new ControlDeskEvent(getPartyQueue()));
 	}
 
     /**
@@ -158,12 +163,14 @@ class ControlDesk extends Thread {
 	public void addPartyQueue(Vector partyNicks) {
 		Vector partyBowlers = new Vector();
 		for (int i = 0; i < partyNicks.size(); i++) {
-			Bowler newBowler = registerPatron(((String) partyNicks.get(i)));
+			Bowler newBowler = BowlerFile.registerPatron(((String) partyNicks.get(i)));
 			partyBowlers.add(newBowler);
 		}
 		Party newParty = new Party(partyBowlers);
 		partyQueue.add(newParty);
-		publish(new ControlDeskEvent(getPartyQueue()));
+//		publish(new ControlDeskEvent(getPartyQueue()));
+		//x//
+		subscribers.publish(new ControlDeskEvent(getPartyQueue()));
 	}
 
     /**
@@ -179,7 +186,7 @@ class ControlDesk extends Thread {
 			String nextParty =
 				((Bowler) ((Vector) ((Party) partyQueue.asVector().get( i ) ).getMembers())
 					.get(0))
-					.getNick() + "'s Party";
+					.getNickName() + "'s Party";
 			displayPartyQueue.addElement(nextParty);
 		}
 		return displayPartyQueue;
@@ -203,11 +210,10 @@ class ControlDesk extends Thread {
      *
      */
 
-	//---changes---
-	//meaningful name
-	public void subscribe(ControlDeskObserver newSubscriber) {
-		subscribers.add(newSubscriber);
-	}
+//	public void subscribe(ControlDeskObserver adding) {
+//		subscribers.add(adding);
+//	}
+	//x//remove
 
     /**
      * Broadcast an event to subscribing objects.
@@ -216,16 +222,17 @@ class ControlDesk extends Thread {
      *
      */
 
-	public void publish(ControlDeskEvent event) {
-		Iterator eventIterator = subscribers.iterator();
-		while (eventIterator.hasNext()) {
-			(
-				(ControlDeskObserver) eventIterator
-					.next())
-					.receiveControlDeskEvent(
-				event);
-		}
-	}
+//	public void publish(ControlDeskEvent event) {
+//		Iterator eventIterator = subscribers.iterator();
+//		while (eventIterator.hasNext()) {
+//			(
+//				(ControlDeskObserver) eventIterator
+//					.next())
+//					.receiveControlDeskEvent(
+//				event);
+//		}
+//	}
+	//x// remove
 
     /**
      * Accessor method for lanes
