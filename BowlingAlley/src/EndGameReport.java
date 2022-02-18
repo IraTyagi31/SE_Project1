@@ -31,9 +31,12 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 	
 		result =0;
 		retVal = new Vector();
-		win = new JFrame("End Game Report for " + partyName + "?" );
-		win.getContentPane().setLayout(new BorderLayout());
-		((JPanel) win.getContentPane()).setOpaque(false);
+//		win = new JFrame("End Game Report for " + partyName + "?" );
+//		win.getContentPane().setLayout(new BorderLayout());
+//		((JPanel) win.getContentPane()).setOpaque(false);
+		
+		//---changes---
+		win=SuperView.addJFrame("End Game Report for " + partyName + "?" );
 
 		JPanel colPanel = new JPanel();
 		colPanel.setLayout(new GridLayout( 1, 2 ));
@@ -65,20 +68,27 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
-		printButton = new JButton("Print Report");
-		JPanel printButtonPanel = new JPanel();
-		printButtonPanel.setLayout(new FlowLayout());
+//		printButton = new JButton("Print Report");
+//		JPanel printButtonPanel = new JPanel();
+//		printButtonPanel.setLayout(new FlowLayout());
+//		printButton.addActionListener(this);
+//		printButtonPanel.add(printButton);
+//
+//		finished = new JButton("Finished");
+//		JPanel finishedPanel = new JPanel();
+//		finishedPanel.setLayout(new FlowLayout());
+//		finished.addActionListener(this);
+//		finishedPanel.add(finished);
+//
+//		buttonPanel.add(printButton);
+//		buttonPanel.add(finished);
+		
+		//---changes--
+		printButton = SuperView.addButton("Print Report", buttonPanel);
 		printButton.addActionListener(this);
-		printButtonPanel.add(printButton);
-
-		finished = new JButton("Finished");
-		JPanel finishedPanel = new JPanel();
-		finishedPanel.setLayout(new FlowLayout());
+		finished=SuperView.addButton("Finished", buttonPanel);
 		finished.addActionListener(this);
-		finishedPanel.add(finished);
-
-		buttonPanel.add(printButton);
-		buttonPanel.add(finished);
+		
 
 		// Clean up main panel
 		colPanel.add(partyPanel);

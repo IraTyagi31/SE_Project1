@@ -45,9 +45,12 @@ public class NewPatronView implements ActionListener {
 		addParty=v;	
 		done = false;
 
-		win = new JFrame("Add Patron");
-		win.getContentPane().setLayout(new BorderLayout());
-		((JPanel) win.getContentPane()).setOpaque(false);
+//		win = new JFrame("Add Patron");
+//		win.getContentPane().setLayout(new BorderLayout());
+//		((JPanel) win.getContentPane()).setOpaque(false);
+		
+		//---changes---
+		win=SuperView.addJFrame("Add Patron");
 
 		JPanel colPanel = new JPanel();
 		colPanel.setLayout(new BorderLayout());
@@ -88,20 +91,27 @@ public class NewPatronView implements ActionListener {
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
-		finished = new JButton("Add Patron");
-		JPanel finishedPanel = new JPanel();
-		finishedPanel.setLayout(new FlowLayout());
+//		finished = new JButton("Add Patron");
+//		JPanel finishedPanel = new JPanel();
+//		finishedPanel.setLayout(new FlowLayout());
+//		finished.addActionListener(this);
+//		finishedPanel.add(finished);
+//
+//		abort = new JButton("Abort");
+//		JPanel abortPanel = new JPanel();
+//		abortPanel.setLayout(new FlowLayout());
+//		abort.addActionListener(this);
+//		abortPanel.add(abort);
+//
+//		buttonPanel.add(abortPanel);
+//		buttonPanel.add(finishedPanel);
+		
+		//---changes---
+		finished = SuperView.addButton("Add Patron", buttonPanel);
 		finished.addActionListener(this);
-		finishedPanel.add(finished);
-
-		abort = new JButton("Abort");
-		JPanel abortPanel = new JPanel();
-		abortPanel.setLayout(new FlowLayout());
+		
+		abort = SuperView.addButton("Abort", buttonPanel);
 		abort.addActionListener(this);
-		abortPanel.add(abort);
-
-		buttonPanel.add(abortPanel);
-		buttonPanel.add(finishedPanel);
 
 		// Clean up main panel
 		colPanel.add(patronPanel, "Center");

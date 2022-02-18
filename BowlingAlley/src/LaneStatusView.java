@@ -59,32 +59,46 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
-		viewLane = new JButton("View Lane");
-		JPanel viewLanePanel = new JPanel();
-		viewLanePanel.setLayout(new FlowLayout());
+//		viewLane = new JButton("View Lane");
+//		JPanel viewLanePanel = new JPanel();
+//		viewLanePanel.setLayout(new FlowLayout());
+//		viewLane.addActionListener(this);
+//		viewLanePanel.add(viewLane);
+//
+//		viewPinSetter = new JButton("Pinsetter");
+//		JPanel viewPinSetterPanel = new JPanel();
+//		viewPinSetterPanel.setLayout(new FlowLayout());
+//		viewPinSetter.addActionListener(this);
+//		viewPinSetterPanel.add(viewPinSetter);
+//
+//		maintenance = new JButton("     ");
+//		maintenance.setBackground( Color.GREEN );
+//		JPanel maintenancePanel = new JPanel();
+//		maintenancePanel.setLayout(new FlowLayout());
+//		maintenance.addActionListener(this);
+//		maintenancePanel.add(maintenance);
+
+		
+
+
+//		buttonPanel.add(viewLanePanel);
+//		buttonPanel.add(viewPinSetterPanel);
+//		buttonPanel.add(maintenancePanel);
+		
+		//---changes---
+		viewLane = SuperView.addButton("View Lane", buttonPanel);
 		viewLane.addActionListener(this);
-		viewLanePanel.add(viewLane);
-
-		viewPinSetter = new JButton("Pinsetter");
-		JPanel viewPinSetterPanel = new JPanel();
-		viewPinSetterPanel.setLayout(new FlowLayout());
+		
+		viewPinSetter = SuperView.addButton("Pinsetter", buttonPanel);
 		viewPinSetter.addActionListener(this);
-		viewPinSetterPanel.add(viewPinSetter);
-
-		maintenance = new JButton("     ");
+		
+		maintenance = SuperView.addButton("     ", buttonPanel);
 		maintenance.setBackground( Color.GREEN );
-		JPanel maintenancePanel = new JPanel();
-		maintenancePanel.setLayout(new FlowLayout());
 		maintenance.addActionListener(this);
-		maintenancePanel.add(maintenance);
-
+		
+		
 		viewLane.setEnabled( false );
 		viewPinSetter.setEnabled( false );
-
-
-		buttonPanel.add(viewLanePanel);
-		buttonPanel.add(viewPinSetterPanel);
-		buttonPanel.add(maintenancePanel);
 
 		jp.add( cLabel );
 		jp.add( curBowler );

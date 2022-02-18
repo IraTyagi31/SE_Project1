@@ -28,9 +28,12 @@ public class EndGamePrompt implements ActionListener {
 
 		result =0;
 		
-		win = new JFrame("Another Game for " + partyName + "?" );
-		win.getContentPane().setLayout(new BorderLayout());
-		((JPanel) win.getContentPane()).setOpaque(false);
+//		win = new JFrame("Another Game for " + partyName + "?" );
+//		win.getContentPane().setLayout(new BorderLayout());
+//		((JPanel) win.getContentPane()).setOpaque(false);
+		
+		//---changes---
+		win=SuperView.addJFrame("Another Game for " + partyName + "?" );
 
 		JPanel colPanel = new JPanel();
 		colPanel.setLayout(new GridLayout( 2, 1 ));
@@ -49,21 +52,31 @@ public class EndGamePrompt implements ActionListener {
 		buttonPanel.setLayout(new GridLayout(1, 2));
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
+		
+		//---changes---
 
-		yesButton = new JButton("Yes");
-		JPanel yesButtonPanel = new JPanel();
-		yesButtonPanel.setLayout(new FlowLayout());
+//		yesButton = new JButton("Yes");
+//		JPanel yesButtonPanel = new JPanel();
+//		yesButtonPanel.setLayout(new FlowLayout());
+//		yesButton.addActionListener(this);
+//		yesButtonPanel.add(yesButton);
+//
+//		noButton = new JButton("No");
+//		JPanel noButtonPanel = new JPanel();
+//		noButtonPanel.setLayout(new FlowLayout());
+//		noButton.addActionListener(this);
+//		noButtonPanel.add(noButton);
+//
+//		buttonPanel.add(yesButton);
+//		buttonPanel.add(noButton);
+		
+		yesButton=SuperView.addButton("Yes", buttonPanel);
 		yesButton.addActionListener(this);
-		yesButtonPanel.add(yesButton);
-
-		noButton = new JButton("No");
-		JPanel noButtonPanel = new JPanel();
-		noButtonPanel.setLayout(new FlowLayout());
+		noButton=SuperView.addButton("No", buttonPanel);
 		noButton.addActionListener(this);
-		noButtonPanel.add(noButton);
-
-		buttonPanel.add(yesButton);
-		buttonPanel.add(noButton);
+		
+		
+		
 
 		// Clean up main panel
 		colPanel.add(labelPanel);
