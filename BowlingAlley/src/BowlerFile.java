@@ -25,7 +25,7 @@ import java.io.*;
 class BowlerFile {
 
 	/** The location of the bowelr database */
-	private static String BOWLER_DAT = "/home/ira/eclipse-workspace/seProject1/src/BOWLERS.DAT";
+	private static String BOWLER_DAT = "BOWLERS.DAT";
 
     /**
      * Retrieves bowler information from the database and returns a Bowler objects with populated fields.
@@ -57,6 +57,24 @@ class BowlerFile {
 		}
 		System.out.println("Nick not found...");
 		return null;
+	}
+	
+	//x//
+	public static Bowler registerPatron(String nickName) {
+		Bowler patron = null;
+
+		try {
+			// only one patron / nick.... no dupes, no checks
+
+			patron = BowlerFile.getBowlerInfo(nickName);
+
+		} catch (FileNotFoundException e) {
+			System.err.println("Error..." + e);
+		} catch (IOException e) {
+			System.err.println("Error..." + e);
+		}
+
+		return patron;
 	}
 
     /**
